@@ -4,45 +4,45 @@ namespace Framework;
 class Image
 {
 	
-	//Â·¾¶
+	//è·¯å¾„
 	protected $path;
 	protected $isRandName;
 	
 	
-	//³õÊ¹»¯Â·¾¶
+	//åˆä½¿åŒ–è·¯å¾„
 	public function __construct($path = './', $r = true)
 	{
 		$this->path = rtrim($path,'/').'/';
 		$this->isRandName = $r;	}
 	
-	//Ë®Ó¡
-	//1.¼ì²âÎÄ¼şÊÇ·ñ´æÔÚ
+	//æ°´å°
+	//1.æ£€æµ‹æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	
-	//5. ºÏ²¢Í¼Æ¬
-	//6. ±£´æÍ¼Æ¬
-	//7. Ïú»Ù×ÊÔ´
+	//5. åˆå¹¶å›¾ç‰‡
+	//6. ä¿å­˜å›¾ç‰‡
+	//7. é”€æ¯èµ„æº
 	public function water($dst, $src, $pos = 9, $prefix = 'wa_',$tmd = 100)
 	{
-		//±ØĞëÒª´«ÈëÒ»¸öÂ·¾¶
-		//Ë®Ó¡Í¼Æ¬µÄÂ·¾¶ÊÇ¹Ì¶¨
+		//å¿…é¡»è¦ä¼ å…¥ä¸€ä¸ªè·¯å¾„
+		//æ°´å°å›¾ç‰‡çš„è·¯å¾„æ˜¯å›ºå®š
 		$src = $this->path . $src;
 		if ( !file_exists($src) || !file_exists($dst)) {
-			exit('Ë®Ó¡Í¼Æ¬ÕßÄ¿±êÍ¼Æ¬²»´æÔÚ');
+			exit('æ°´å°å›¾ç‰‡è€…ç›®æ ‡å›¾ç‰‡ä¸å­˜åœ¨');
 		} 
 		
-		//ÌáÇ°»ñµÃÍ¼Æ¬µÄÏà¹ØĞÅÏ¢¡¢¿í¸ß¡¢Ãû×Ö¡¢ÀàĞÍ
+		//æå‰è·å¾—å›¾ç‰‡çš„ç›¸å…³ä¿¡æ¯ã€å®½é«˜ã€åå­—ã€ç±»å‹
 		$dstInfo = self::getImageInfo($dst);
 		$srcInfo = self::getImageInfo($src);
 		
-		//2.ÅĞ¶ÏË®Ó¡Í¼Æ¬²»ÄÜ´óÓÚ±³¾°Í¼Æ¬
+		//2.åˆ¤æ–­æ°´å°å›¾ç‰‡ä¸èƒ½å¤§äºèƒŒæ™¯å›¾ç‰‡
 		if (!$this->_checkSize($dstInfo,$srcInfo)) {
-			exit('Ë®Ó¡Í¼Æ¬´óĞ¡´óÓÚ±³¾°Í¼Æ¬´óĞ¡');
+			exit('æ°´å°å›¾ç‰‡å¤§å°å¤§äºèƒŒæ™¯å›¾ç‰‡å¤§å°');
 		}
 		
-		//3.»ñµÃÎ»1,2,3,4,5,6,7,8,9,0
+		//3.è·å¾—ä½1,2,3,4,5,6,7,8,9,0
 		$position = self::getPosition($dstInfo, $srcInfo, $pos);
 		
-		//4.´ò¿ªÍ¼Æ¬×ÊÔ´
+		//4.æ‰“å¼€å›¾ç‰‡èµ„æº
 		$dstRes = self::openImg($dst,$dstInfo);
 		$srcRes = self::openImg($src,$srcInfo);
 		
@@ -69,7 +69,7 @@ class Image
 	public function thumb($img, $width, $height, $prefix = 'thumb_')
 	{
 		if (!file_exists($img)) {
-			exit('ÎÄ¼şÂ·¾¶²»ÕıÔÚ');
+			exit('æ–‡ä»¶è·¯å¾„ä¸æ­£åœ¨');
 		}
 		
 		$info = self::getImageInfo($img);
@@ -108,15 +108,15 @@ class Image
 	
 	private static function getNewSize($width, $height, $imgInfo)
 	{	
-		$size["width"] = $imgInfo["width"];   //½«Ô­Í¼Æ¬µÄ¿í¶È¸øÊı×éÖĞµÄ$size["width"]
-		$size["height"] = $imgInfo["height"];  //½«Ô­Í¼Æ¬µÄ¸ß¶È¸øÊı×éÖĞµÄ$size["height"]
+		$size["width"] = $imgInfo["width"];   //å°†åŸå›¾ç‰‡çš„å®½åº¦ç»™æ•°ç»„ä¸­çš„$size["width"]
+		$size["height"] = $imgInfo["height"];  //å°†åŸå›¾ç‰‡çš„é«˜åº¦ç»™æ•°ç»„ä¸­çš„$size["height"]
 		
 		if($width < $imgInfo["width"]) {
-			$size["width"] = $width;             //Ëõ·ÅµÄ¿í¶ÈÈç¹û±ÈÔ­Í¼Ğ¡²ÅÖØĞÂÉèÖÃ¿í¶È
+			$size["width"] = $width;             //ç¼©æ”¾çš„å®½åº¦å¦‚æœæ¯”åŸå›¾å°æ‰é‡æ–°è®¾ç½®å®½åº¦
 		}
 
 		if ($width < $imgInfo["height"]) {
-			$size["height"] = $height;            //Ëõ·ÅµÄ¸ß¶ÈÈç¹û±ÈÔ­Í¼Ğ¡²ÅÖØĞÂÉèÖÃ¸ß¶È
+			$size["height"] = $height;            //ç¼©æ”¾çš„é«˜åº¦å¦‚æœæ¯”åŸå›¾å°æ‰é‡æ–°è®¾ç½®é«˜åº¦
 		}
 
 		if($imgInfo["width"]*$size["width"] > $imgInfo["height"] * $size["height"]) {
@@ -260,12 +260,12 @@ class Image
 	
 	
 	
-	//Ëõ·Å
-	//1.¼ì²âÎÄ¼şÊÇ·ñ´æÔÚ£¬²¢ÇÒ»ñµÃÍ¼Æ¬µÄÏà¹ØĞÅÏ¢
-	//2.´ò¿ªÍ¼Æ¬
-	//3.»ñµÃĞÂµÄ³ß´ç´óĞ¡
-	//4.°ÑÍ¼Æ¬µ÷Õû´óĞ¡£¬²¢ÇÒÈÃÍ¼Æ¬±³¾°ÍòÒ»ÊÇgifÍ¸Ã÷´¦Àí±äºÚÏÂÖÜ
-	//5.±£´æÍ¼Æ¬
+	//ç¼©æ”¾
+	//1.æ£€æµ‹æ–‡ä»¶æ˜¯å¦å­˜åœ¨ï¼Œå¹¶ä¸”è·å¾—å›¾ç‰‡çš„ç›¸å…³ä¿¡æ¯
+	//2.æ‰“å¼€å›¾ç‰‡
+	//3.è·å¾—æ–°çš„å°ºå¯¸å¤§å°
+	//4.æŠŠå›¾ç‰‡è°ƒæ•´å¤§å°ï¼Œå¹¶ä¸”è®©å›¾ç‰‡èƒŒæ™¯ä¸‡ä¸€æ˜¯gifé€æ˜å¤„ç†å˜é»‘ä¸‹å‘¨
+	//5.ä¿å­˜å›¾ç‰‡
 	//over
 	
 	
