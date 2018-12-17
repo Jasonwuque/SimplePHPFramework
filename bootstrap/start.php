@@ -12,10 +12,10 @@ class Start
 		
 	}
 	
-	//按照控制器、找下面应的成员方法
+	//鎸夌収鎺у埗鍣ㄣ�佹壘涓嬮潰搴旂殑鎴愬憳鏂规硶
 	public static function router()
 	{
-		//放置初使化init里面
+		//鏀剧疆鍒濅娇鍖杋nit閲岄潰
 		$_GET['m'] = isset($_GET['m']) ? $_GET['m'] : 'Index';
 		
 		$action = isset($_GET['a']) ? $_GET['a'] : 'index';
