@@ -5,6 +5,5 @@ use \Framework\Model;
 
 class UserModel extends Model
 {
-	
-	
+    
 }

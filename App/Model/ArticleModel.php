@@ -5,6 +5,5 @@ use \Framework\Model;
 
 class ArticleModel extends Model
 {
-	
-	
+    
 }
